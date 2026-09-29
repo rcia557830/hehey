@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="VERITAS CORE — RBCIA Accounting Firm's client, document, and compliance workspace.">
+  <meta name="theme-color" content="#101d30">
+  <title>VERITAS CORE — RBCIA Accounting Firm</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23101d30'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-family='Georgia' font-size='46' fill='%23c9a55f'%3EV%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="css/styles.css" rel="stylesheet">
+</head>
+<body>
+  <a class="skip-link" href="#viewRoot">Skip to content</a>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar" aria-label="Workspace navigation">
+      <a class="brand" href="#overview" data-action="navigate" data-view="overview" aria-label="Veritas Core overview">
+        <span class="brand-mark" aria-hidden="true">V</span>
+        <span><span class="brand-name">VERITAS CORE</span><span class="brand-caption">RBCIA Accounting Firm</span></span>
+      </a>
+      <button class="icon-button sidebar-close" id="sidebarClose" aria-label="Close navigation"><i class="bi bi-x-lg" aria-hidden="true"></i></button>
+      <div class="nav-label">YOUR WORKSPACE</div>
+      <nav id="mainNav" aria-label="Primary navigation">
+        <button class="nav-item active" data-action="navigate" data-view="overview" aria-current="page"><i class="bi bi-grid-1x2" aria-hidden="true"></i>Overview</button>
+        <button class="nav-item" data-action="navigate" data-view="clients"><i class="bi bi-people" aria-hidden="true"></i>Clients</button>
+        <button class="nav-item" data-action="navigate" data-view="documents"><i class="bi bi-folder2-open" aria-hidden="true"></i>Documents</button>
+        <button class="nav-item" data-action="navigate" data-view="ledger"><i class="bi bi-journal-text" aria-hidden="true"></i>Ledger Review</button>
+        <button class="nav-item" data-action="navigate" data-view="compliance"><i class="bi bi-calendar2-check" aria-hidden="true"></i>Compliance</button>
+        <button class="nav-item" data-action="navigate" data-view="billing"><i class="bi bi-receipt" aria-hidden="true"></i>Billing</button>
+        <button class="nav-item" data-action="navigate" data-view="knowledge"><i class="bi bi-book" aria-hidden="true"></i>Knowledge</button>
+        <div class="nav-divider"></div>
+        <button class="nav-item" data-action="navigate" data-view="workspace"><i class="bi bi-sliders2" aria-hidden="true"></i>Workspace</button>
+      </nav>
+    </aside>
+    <button id="sidebarOverlay" class="sidebar-overlay" aria-label="Close navigation" tabindex="-1" hidden></button>
+    <main class="main-area" id="mainArea">
+      <header class="topbar">
+        <div class="topbar-heading">
+          <button class="icon-button mobile-toggle" id="sidebarToggle" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false"><i class="bi bi-list" aria-hidden="true"></i></button>
+          <div><div class="eyebrow">RBCIA / WORKSPACE</div><h1 id="pageTitle">Overview</h1></div>
+        </div>
+        <div class="topbar-tools">
+          <button id="commandTrigger" class="search-trigger" aria-haspopup="dialog" aria-controls="commandPalette"><i class="bi bi-search" aria-hidden="true"></i><span>Search workspace</span><kbd>Ctrl K</kbd></button>
+          <div class="notification-wrap">
+            <button id="notificationTrigger" class="icon-button" aria-label="Notifications" aria-controls="notificationPanel" aria-expanded="false"><i class="bi bi-bell" aria-hidden="true"></i><span id="notificationDot" class="notification-dot" hidden></span></button>
+            <section id="notificationPanel" class="notification-panel" aria-label="Notifications" hidden></section>
+          </div>
+          <button id="profileTrigger" class="profile-button" aria-label="Open workspace settings"><span id="avatar" class="avatar">RT</span><span class="profile-copy"><strong id="userName">RBCIA team</strong><span id="userRole">Office Manager</span></span></button>
+        </div>
+      </header>
+      <div class="content-wrap">
+        <div id="storageAlert" class="system-alert" role="status" hidden></div>
+        <div id="loadError" class="system-alert">Loading your workspace. If this message remains, check your connection and reload to load the interface resources.</div>
+        <div id="viewRoot" tabindex="-1" aria-busy="true"></div>
+      </div>
+      <footer class="workspace-footer"><span>VERITAS CORE</span><span id="saveStatus">Workspace data is saved locally</span></footer>
+    </main>
+  </div>
+
+  <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="formModalTitle">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable"><div class="modal-content">
+      <div class="modal-header"><div><div class="eyebrow">VERITAS CORE</div><h2 class="modal-title" id="formModalTitle">New record</h2></div><button class="btn-close" data-bs-dismiss="modal" aria-label="Close form"></button></div>
+      <div class="modal-body"><form id="recordForm"><div id="formError" class="system-alert" role="alert" hidden></div><div id="formModalBody"></div><button type="submit" class="visually-hidden" tabindex="-1">Save record</button></form></div>
+      <div class="modal-footer"><button class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button><button class="btn btn-primary" id="formSave" type="submit" form="recordForm">Save record</button></div>
+    </div></div>
+  </div>
+  <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="detailModalTitle">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable"><div class="modal-content">
+      <div class="modal-header"><div><div class="eyebrow">VERITAS CORE</div><h2 class="modal-title" id="detailModalTitle">Record details</h2></div><button class="btn-close" data-bs-dismiss="modal" aria-label="Close details"></button></div>
+      <div class="modal-body" id="detailModalBody"></div><div class="modal-footer" id="detailModalFooter"></div>
+    </div></div>
+  </div>
+
+  <dialog id="commandPalette" class="command-palette" aria-labelledby="commandTitle">
+    <h2 id="commandTitle" class="visually-hidden">Search workspace</h2>
+    <div class="command-input-wrap"><i class="bi bi-search" aria-hidden="true"></i><input id="commandInput" type="search" autocomplete="off" placeholder="Search pages, records, or actions…" role="combobox" aria-autocomplete="list" aria-expanded="true" aria-controls="commandResults" aria-label="Search pages, records, or actions"><button id="commandClose" class="key-button" aria-label="Close search">Esc</button></div>
+    <div id="commandResults" class="command-results" role="listbox" aria-label="Search results"></div>
+    <div class="command-footer"><span>↑ ↓ to navigate · Enter to open</span><span>VERITAS CORE</span></div>
+    <div id="commandStatus" class="visually-hidden" aria-live="polite"></div>
+  </dialog>
+  <div id="toastStack" class="toast-stack" role="region" aria-label="Workspace messages" aria-live="polite" aria-relevant="additions"></div>
+  <input type="file" id="importInput" accept=".json,application/json" hidden>
+  <noscript><div class="system-alert">Enable JavaScript to use your Veritas Core workspace.</div></noscript>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
